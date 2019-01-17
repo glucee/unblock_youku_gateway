@@ -17,9 +17,9 @@ Unblock Gateway 是一个帮助配置 Shadowsocks 回国代理分流的命令行
 
 ![网关示意图](https://cdn-images-1.medium.com/max/1000/1*0ya9yYQFUNAbwp_eKY58Cw.jpeg)
 
-### Unblock Gateway 的功能分为两部分：
+### Unblock Gateway 的功能有：
 
-* [网关](#%E8%B7%AF%E7%94%B1%E5%99%A8)
+* 网关
     + [原理](#%E5%8E%9F%E7%90%86)
     + [安装](#%E5%AE%89%E8%A3%85)
     + [使用](#%E4%BD%BF%E7%94%A8)
@@ -29,7 +29,7 @@ Unblock Gateway 是一个帮助配置 Shadowsocks 回国代理分流的命令行
         - [开启代理](#%E5%BC%80%E5%90%AF%E4%BB%A3%E7%90%86)
         - [检查 <URL/IP/域名> 是否走代理](#%E6%A3%80%E6%9F%A5-urlip%E5%9F%9F%E5%90%8D-%E6%98%AF%E5%90%A6%E8%B5%B0%E4%BB%A3%E7%90%86)
         - [更新规则](#%E6%9B%B4%E6%96%B0%E8%A7%84%E5%88%99)
-        - [仅生成 ipset 规则配置文件](#仅生成 ipset 规则配置文件)
+        - [仅生成 ipset 规则配置文件](#仅生成ipset规则配置文件)
         - [修改规则模板](#%E4%BF%AE%E6%94%B9%E8%A7%84%E5%88%99%E6%A8%A1%E6%9D%BF)
 
 ---
@@ -150,7 +150,7 @@ $ sudo python3 unblockgw.py router renew
 
 Unblock Gateway 在网关上默认定时每日 03:00 自动更新分流规则，及时跟进 Unblock Youku 规则的变化。
 
-#### 仅生成 ipset 规则配置文件
+#### 仅生成ipset规则配置文件
 
 ```console
 $ sudo python3 unblockgw.py router create
