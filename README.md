@@ -1,21 +1,21 @@
 # Unblock-Youku Gateway
-Implementation of Unblock-Youku function in Gateway Server 在网关服务器中实现unblockyouku功能
+Implementation of Unblock-Youku function in Gateway Server 在网关服务器中实现unblockyouku功能。
 
-Unblock Gateway 是一个帮助配置 Shadowsocks 回国代理分流的命令行小工具，实现通过网关服务器自动分流，将国内一些网站的访问通过 Shadowsocks 代理回国，用以解除这些网站的海外访问限制，其它流量则会正常直连不走回国代理。
-
-当然前提是你需要有一台位于国内的 Shadowsocks 服务器，在国内的路由器上[部署 Shadowsocks 服务器端](https://github.com/gxfxyz/unblockgw/wiki/在华硕梅林固件（Asuswrt-Merlin）网关上部署-Shadowsocks-服务器端（ss-server）)也是可行的。
+Unblock Gateway 是一个帮助配置 Shadowsocks 回国代理分流的命令行小工具，实现通过网关服务器自动分流，将国内一些网站的访问通过 Shadowsocks 代理回国，用以解除这些网站的海外访问限制，其它流量则会正常直连不走回国代理。本Repo可以搭建在树莓派、任何一台局域网Linux机器，其他机器只需要设置该网关，或者通过路由器设置该网关。
 
 分流规则提取自 [Unblock Youku](https://github.com/uku/Unblock-Youku)，Unblock Youku 的规则中一般只包含站点用于检测的地址 ，不包含实际音视频流的地址，因此大部分情况下音视频流可以直连不用走代理，这样可以避免音视频变慢，也可以有效节约代理服务器的流量。
 
 ### 来源与修改
 
-本Repo大多数功能来自于[unblockchn](https://github.com/gxfxyz/unblockchn/)，感谢原作者。
-
-本Repo主要为了解决没有华硕梅林路由器，但仍然想让路由器下的所有设备都可以使用unblock youku的情况。
+本Repo大多数功能来自于[unblockchn](https://github.com/gxfxyz/unblockchn/)，感谢原作者。本Repo主要为了解决没有华硕梅林路由器，但仍然想让路由器下的所有设备都可以使用unblock youku的情况。
 
 网关其实含义非常丰富，可以是树莓派，可以是家庭服务器，也可以是一台独立的PC，甚至还可以是PC上虚拟机。由于网关即为路由中的下一跳，所以局域网内所有的数据都会首先被发送到这台网关上，由它再来判断是直接发给目标地址，还是走ss。[见参考](https://medium.com/@oliviaqrs/%E5%88%A9%E7%94%A8shadowsocks%E6%89%93%E9%80%A0%E5%B1%80%E5%9F%9F%E7%BD%91%E7%BF%BB%E5%A2%99%E9%80%8F%E6%98%8E%E7%BD%91%E5%85%B3-fb82ccb2f729)
 
 ![网关示意图](https://cdn-images-1.medium.com/max/1000/1*0ya9yYQFUNAbwp_eKY58Cw.jpeg)
+
+### 准备
+
+当然前提是你需要有一台位于国内的 Shadowsocks 服务器，在国内的路由器上[部署 Shadowsocks 服务器端](https://github.com/gxfxyz/unblockgw/wiki/在华硕梅林固件（Asuswrt-Merlin）网关上部署-Shadowsocks-服务器端（ss-server）)也是可行的。
 
 ### Unblock Gateway 的功能有：
 
@@ -31,6 +31,7 @@ Unblock Gateway 是一个帮助配置 Shadowsocks 回国代理分流的命令行
         - [更新规则](#%E6%9B%B4%E6%96%B0%E8%A7%84%E5%88%99)
         - [仅生成 ipset 规则配置文件](#仅生成ipset规则配置文件)
         - [修改规则模板](#%E4%BF%AE%E6%94%B9%E8%A7%84%E5%88%99%E6%A8%A1%E6%9D%BF)
+    + [配置](#配置网关上网)
 
 ---
 
@@ -179,9 +180,9 @@ add blacklist 208.73.51.100
 $ python3 unblockgw.py router renew
 ```
 
-### 配置
+### 配置网关上网
 
-如果你的网关服务器地址是192.168.1.XX，可以在路由器界面上配置网关为该地址，那么，所有连上该服务器的设备都会经过该网关服务器分流，也就自动使用了Unblock-Youku
+如果你的网关服务器地址是192.168.1.XX，可以在路由器界面上配置网关为该地址，那么，所有连上该服务器的设备都会经过该网关服务器分流，也就自动使用了Unblock-Youku，注意DNS地址仍然采用之前的地址，或者使用8.8.8.8
 
 ### 感谢
 
