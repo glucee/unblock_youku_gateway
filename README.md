@@ -39,7 +39,7 @@ Unblock Gateway 是一个帮助配置 Shadowsocks 回国代理分流的命令行
 
 1. 从 Unblock Youku 的 [urls.js](https://github.com/uku/Unblock-Youku/blob/master/shared/urls.js) 中提取分流规则。
 
-2. 根据分流规则生成 dnsmasq 和 ipset 规则，将需要回国代理的 IP 地址加入 chn ipset。
+2. 根据分流规则生成 ipset 规则，将需要回国代理的 IP 地址加入 chn ipset。
 
 3. 添加 iptables 规则，将属于 chn ipset 的请求转发到 Shadowsocks 透明代理工具 ss-redir 的端口，通过 Shadowsocks 代理回国。
 
@@ -58,10 +58,10 @@ $ sudo apt-get install shadowsocks-libev
 
 ```console
 # 安装 Unblock Gateway
-$ git clone https://github.com/glucee/unblockyouku_gateway.git
+$ git clone https://github.com/glucee/unblock_youku_gateway.git
 
 # 进入 Unblock Gateway 目录
-$ cd unblock_gateway
+$ cd unblock_youku_gateway
 
 # 安装 Unblock Gateway 依赖
 $ pip3 install -r requirements.txt
@@ -154,7 +154,7 @@ Unblock Gateway 在网关上默认定时每日 03:00 自动更新分流规则，
 #### 仅生成ipset规则配置文件
 
 ```console
-$ sudo python3 unblockgw.py router create
+$ sudo python3 unblockgw.py create
 生成配置文件成功
 ```
 
@@ -177,7 +177,7 @@ add blacklist 208.73.51.100
 运行更新规则命令来使自定义的规则生效：
 
 ```console
-$ python3 unblockgw.py router renew
+$ python3 unblockgw.py renew
 ```
 
 ### 配置网关上网
