@@ -22,17 +22,19 @@ SS_REDIR_PATH = "/usr/bin/ss-redir"
 SS_REDIR_CONF_PATH = os.path.join(DIR_PATH, "configs/ss-redir.json")
 # ss_redir pid 文件路径
 SS_REDIR_PID_PATH = os.path.join(DIR_PATH, "configs/ss-redir.pid")
+# ss_redir 服务器
+SS_SERVER = "0.0.0.0"
 # ss_redir 本地端口
 SS_REDIR_LOCAL_PORT = 1080
 # ss_redir 配置
 SS_REDIR_CONF = {
-    "server": "0.0.0.0",
+    "server": SS_SERVER,
     "server_port": 1723,
     "local_address": "0.0.0.0",
     "local_port": SS_REDIR_LOCAL_PORT,
     "password": "glucee",
     "timeout": 300,
-    "method": "aes-256-cfb",
+    "method": "rc4-md5",
     "fast_open": True,
     "works": 1
 }
