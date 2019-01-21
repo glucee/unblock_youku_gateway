@@ -65,6 +65,16 @@ $ cd unblock_youku_gateway
 
 # 安装 Unblock Gateway 依赖
 $ pip3 install -r requirements.txt
+
+# 修改 Shadowsocks 服务器配置
+$ vi default_config.py
+
+# 一键配置
+sudo python3 unblockgw.py setup
+
+# 配置网关
+[配置网关](#配置网关上网)
+
 ```
 
 ### 使用
