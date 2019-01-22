@@ -15,7 +15,7 @@ Unblock Gateway 是一个帮助配置 Shadowsocks 回国代理分流的命令行
 
 ### 准备
 
-当然前提是你需要有一台位于国内的 Shadowsocks 服务器，在国内的路由器上[部署 Shadowsocks 服务器端](https://github.com/gxfxyz/unblockgw/wiki/在华硕梅林固件（Asuswrt-Merlin）网关上部署-Shadowsocks-服务器端（ss-server）)也是可行的。
+当然前提是你需要有一台位于国内的 Shadowsocks 服务器，在国内的路由器上[部署 Shadowsocks 服务器端](https://github.com/gxfxyz/unblockchn/wiki/在华硕梅林固件（Asuswrt-Merlin）网关上部署-Shadowsocks-服务器端（ss-server）)也是可行的。
 
 ### Unblock Gateway 的功能有：
 
@@ -72,15 +72,16 @@ $ vi default_config.py
 # 一键配置
 sudo python3 unblockgw.py setup
 
-# 配置网关
-[配置网关](#配置网关上网)
-
 ```
+3. 配置网关
+
+安装完后需配置网关即可，见[配置](#配置网关上网)
 
 ### 使用
 
 ```console
 $ sudo python3 unblockgw.py --help
+
 usage: sudo python3 unblockgw.py router [-h] {status,on,off,check,renew,setup,create}
 
 Unblock Gateway 网关命令：
@@ -193,6 +194,11 @@ $ python3 unblockgw.py renew
 ### 配置网关上网
 
 如果你的网关服务器地址是192.168.1.XX，可以在路由器界面上配置网关为该地址，那么，所有连上该服务器的设备都会经过该网关服务器分流，也就自动使用了Unblock-Youku，注意DNS地址仍然采用之前的地址，或者使用8.8.8.8
+
+### 其他需要注意的点
+
+如果想保存IPTABLE，用户可以安装iptables-persisent，这个软件可以保存IPTABLE的规则，并在开机启动后也不会丢失。
+每次开机启动后，如果想确认服务器没有问题，可以试着使用sudo python3 unblockgw status检查一下。
 
 ### 感谢
 
