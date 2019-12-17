@@ -193,11 +193,17 @@ $ python3 unblockgw.py renew
 
 ### 配置网关上网
 
+上面设置好之后，
+修改 /etc/sysctl.conf， 取消注释:
+net.ipv4.ip_forward=1
+执行命令使其生效
+sysctl -p
+
 如果你的网关服务器地址是192.168.1.XX，可以在路由器界面上配置网关为该地址，那么，所有连上该服务器的设备都会经过该网关服务器分流，也就自动使用了Unblock-Youku，注意DNS地址仍然采用之前的地址，或者使用8.8.8.8
 
 ### 其他需要注意的点
 
-如果想保存IPTABLE，用户可以安装iptables-persisent，这个软件可以保存IPTABLE的规则，并在开机启动后也不会丢失。
+如果想保存IPTABLE，用户可以安装iptables-persistent，这个软件可以保存IPTABLE的规则，并在开机启动后也不会丢失。
 每次开机启动后，如果想确认服务器没有问题，可以试着使用sudo python3 unblockgw status检查一下。
 
 ### 感谢
