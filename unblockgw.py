@@ -75,8 +75,12 @@ Unblock CHN 网关命令：
 
     @classmethod
     def cmd_status(cls):
-        """查看 Unblock CHN 代理状态"""
+        """查看 Unblock Youku Gateway 代理状态"""
         cls.check_setup()
+        ss_redir_running = cls.check_ss_redir()
+        if not ss_redir_running:
+            ologger.info("ss-redir 未运行")
+            return
         iptables_chn_exists = cls.check_iptables_chn()
         if iptables_chn_exists:
             ologger.info("已开启")
@@ -191,10 +195,9 @@ Unblock CHN 网关命令：
 
         ologger.info("配置成功")
 
-
     @classmethod
     def cmd_create(cls):
-        """仅生成 ipset 和 dnsmasq 规则配置文件"""
+        """仅生成 ipset 规则配置文件"""
 
         # 生成网关配置文件
         unblock_youku = UnblockYouku()
@@ -213,18 +216,17 @@ Unblock CHN 网关命令：
             for domain in domains:
                 if re.match(r"\d+\.\d+\.\d+\.\d+", domain):  # IP
                     rule = "add chn {}".format(domain)
-                    if rule not in ipset_rules:
-                        ipset_rules.append(rule)
+                    ipset_rules.append(rule)
                 else:  # 域名
                     try:
-                        ip = socket.gethostbyname(domain)
-                        if ip not in ["127.0.0.1", "0.0.0.1"]:
-                            rule = "add chn {}".format(ip)
-                            if rule not in ipset_rules:
+                        ips = socket.gethostbyname_ex(domain)[2]
+                        for ip in ips:
+                            if ip not in ["127.0.0.1", "0.0.0.1"]:
+                                rule = f"add chn {ip}"
                                 ipset_rules.append(rule)
                     except:
                         pass
-                    rule = "ipset=/{}/chn".format(domain)
+        ipset_rules = set(ipset_rules) #remove the same IPs
         # 从模板生成 ipset 规则配置文件 ipset.rules
         cls.create_ipset_conf_file(ipset_rules)
 
